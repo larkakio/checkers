@@ -1,6 +1,6 @@
 /** Base Mini App manifest config — see https://docs.base.org/mini-apps/quickstart/create-new-miniapp */
 
-const ROOT_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-clash.vercel.app'
+const ROOT_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-zeta-seven.vercel.app'
 
 export const minikitConfig = {
   accountAssociation: {

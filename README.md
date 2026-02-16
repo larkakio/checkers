@@ -19,7 +19,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Deploy (Vercel)
 
 1. Push to GitHub and [import in Vercel](https://vercel.com/new).
-2. Set **NEXT_PUBLIC_APP_URL** to your deployment URL (e.g. `https://your-app.vercel.app`).
+2. Set **NEXT_PUBLIC_APP_URL** to your deployment URL (e.g. `https://checkers-zeta-seven.vercel.app`).
 3. Turn off **Deployment Protection** (Settings → Deployment Protection) so the manifest can be fetched.
 4. [Base Build – Account association](https://www.base.dev/preview?tab=account): paste your app URL, submit, verify, then copy the `accountAssociation` object.
 5. In `minikit.config.ts`, paste the `header`, `payload`, and `signature` into `accountAssociation`.

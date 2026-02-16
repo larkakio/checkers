@@ -7,7 +7,7 @@ import { FarcasterReady } from '@/components/FarcasterReady'
 const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron' })
 const exo = Exo_2({ subsets: ['latin'], variable: '--font-exo' })
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-clash.vercel.app'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-zeta-seven.vercel.app'
 
 const FC_EMBED = {
   version: '1' as const,

@@ -3,7 +3,7 @@ import { minikitConfig } from '@/minikit.config'
 
 /** Serves Farcaster/Base Mini App manifest at /.well-known/farcaster.json */
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-clash.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-zeta-seven.vercel.app'
   const manifest = {
     accountAssociation: minikitConfig.accountAssociation,
     miniapp: {
