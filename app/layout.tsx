@@ -35,6 +35,7 @@ export const metadata: Metadata = {
   other: {
     viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
     'theme-color': '#0a0e1a',
+    'base:app_id': '6992e49de0d5d2cf831b5dc2',
     'fc:miniapp': JSON.stringify(FC_EMBED),
     'fc:frame': JSON.stringify(FC_EMBED),
   },
