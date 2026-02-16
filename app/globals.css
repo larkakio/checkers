@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0a0e1a;
+  --secondary: #1a2332;
+  --cyan: #00f3ff;
+  --magenta: #ff0066;
+  --highlight: #0066ff;
+  --board-dark: #0d1520;
+  --board-light: #1a2332;
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-primary text-white min-h-screen;
+  }
+  /* Safe area for notch / home indicator */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Touch targets min 44px */
+button, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Smooth scrolling */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
