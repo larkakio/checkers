@@ -1,35 +1,30 @@
-'use client'
+"use client";
 
-import { useCallback, useEffect, useState } from 'react'
+import { useAccount } from "wagmi";
 
-type MiniAppSDK = {
-  actions?: {
-    ready?: (opts?: unknown) => Promise<void>
-    openUrl?: (url: string | { url: string }) => Promise<void>
-  }
-}
-
-/** Wrapper for @farcaster/miniapp-sdk — dynamic import to avoid SSR issues */
 export function useFarcasterSDK() {
-  const [sdk, setSdk] = useState<MiniAppSDK | null>(null)
+  const { address } = useAccount();
 
-  useEffect(() => {
-    import('@farcaster/miniapp-sdk')
-      .then((mod) => setSdk((mod as { default: MiniAppSDK }).default ?? mod as unknown as MiniAppSDK))
-      .catch(() => {})
-  }, [])
+  const user = address
+    ? {
+        fid: 0,
+        username: undefined as string | undefined,
+        displayName: `${address.slice(0, 6)}…${address.slice(-4)}`,
+        pfpUrl: undefined as string | undefined,
+      }
+    : null;
 
-  const ready = useCallback(() => {
-    sdk?.actions?.ready?.().catch(() => {})
-  }, [sdk])
+  const openUrl = async (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
-  const openUrl = useCallback(
-    (url: string) => {
-      if (sdk?.actions?.openUrl) sdk.actions.openUrl(url).catch(() => window.open(url, '_blank'))
-      else window.open(url, '_blank')
-    },
-    [sdk]
-  )
+  const close = async () => {};
 
-  return { sdk, ready, openUrl }
+  return {
+    actions: null,
+    user,
+    isLoading: false,
+    openUrl,
+    close,
+  };
 }

@@ -2,27 +2,12 @@ import type { Metadata } from 'next'
 import { Orbitron, Exo_2 } from 'next/font/google'
 import './globals.css'
 import { GameProvider } from '@/context/GameContext'
-import { FarcasterReady } from '@/components/FarcasterReady'
+import { Providers } from './providers'
 
 const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron' })
 const exo = Exo_2({ subsets: ['latin'], variable: '--font-exo' })
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://checkers-zeta-seven.vercel.app'
-
-const FC_EMBED = {
-  version: '1' as const,
-  imageUrl: `${APP_URL}/hero-image.png`,
-  button: {
-    title: 'Play Checkers',
-    action: {
-      type: 'launch_frame' as const,
-      name: 'Checkers Clash',
-      url: APP_URL,
-      splashImageUrl: `${APP_URL}/hero-image.png`,
-      splashBackgroundColor: '#0a0e1a',
-    },
-  },
-}
 
 export const metadata: Metadata = {
   title: 'Checkers Clash - Play on Base',
@@ -36,8 +21,6 @@ export const metadata: Metadata = {
     viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
     'theme-color': '#0a0e1a',
     'base:app_id': '6992e49de0d5d2cf831b5dc2',
-    'fc:miniapp': JSON.stringify(FC_EMBED),
-    'fc:frame': JSON.stringify(FC_EMBED),
   },
 }
 
@@ -49,8 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${orbitron.variable} ${exo.variable} font-exo`}>
-        <FarcasterReady />
+        <Providers>
         <GameProvider>{children}</GameProvider>
+        </Providers>
       </body>
     </html>
   )
