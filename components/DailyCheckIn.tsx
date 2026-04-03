@@ -18,7 +18,11 @@ import {
 
 import { WalletModal } from "./WalletModal";
 
-export function DailyCheckIn() {
+type DailyCheckInProps = {
+  variant?: "inline" | "floating";
+};
+
+export function DailyCheckIn({ variant = "floating" }: DailyCheckInProps) {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { switchChainAsync } = useSwitchChain();
@@ -68,13 +72,18 @@ export function DailyCheckIn() {
 
   const busy = isWriting;
 
+  const outerClass =
+    variant === "floating"
+      ? "pointer-events-auto fixed bottom-4 left-4 right-4 z-[9999] flex max-w-md flex-col gap-2 sm:left-auto sm:right-4 sm:w-80 pb-[max(0.5rem,env(safe-area-inset-bottom))]"
+      : "relative z-50 w-full max-w-md flex flex-col gap-2";
+
   return (
     <>
-      <div className="pointer-events-auto fixed bottom-4 left-4 right-4 z-[80] flex max-w-md flex-col gap-2 sm:left-auto sm:right-4 sm:w-80">
+      <div className={outerClass}>
         {err ? (
           <p className="rounded-lg bg-red-950/90 px-3 py-2 text-xs text-red-200">{err}</p>
         ) : null}
-        <div className="flex items-center gap-2 rounded-2xl border border-cyan-500/40 bg-[#0a0e27]/95 px-3 py-2 shadow-lg backdrop-blur">
+        <div className="flex items-center gap-2 rounded-2xl border-2 border-cyan-400/50 bg-[#0f1833]/98 px-3 py-2.5 shadow-[0_0_24px_rgba(34,211,238,0.2)] backdrop-blur-md">
           <div className="min-w-0 flex-1">
             <p className="font-orbitron text-xs text-cyan-400">Daily check-in</p>
             {address ? (
@@ -83,7 +92,7 @@ export function DailyCheckIn() {
                 {streak != null ? ` · streak ${String(streak)}` : null}
               </p>
             ) : (
-              <p className="text-[11px] text-slate-500">Connect to record on Base</p>
+              <p className="text-[11px] text-slate-500">Connect to reward on Base</p>
             )}
           </div>
           {!isConnected ? (

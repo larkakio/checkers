@@ -1,5 +1,6 @@
 'use client'
 
+import { DailyCheckIn } from '@/components/DailyCheckIn'
 import { useGameContext } from '@/context/GameContext'
 import { Board } from '@/components/game/Board'
 import { PlayerPanel } from '@/components/ui/PlayerPanel'
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-4 p-4 pb-safe">
+      <DailyCheckIn variant="inline" />
       <header className="flex w-full max-w-md items-center justify-between">
         <h1 className="font-orbitron text-lg font-bold text-cyan">Checkers Clash</h1>
         <div className="flex items-center gap-2">

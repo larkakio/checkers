@@ -1,6 +1,7 @@
+import { baseAccount } from "@checkers-wagmi/baseAccount";
+import { walletConnect } from "@checkers-wagmi/walletConnect";
 import { http, createConfig, createStorage, cookieStorage } from "wagmi";
 import { mainnet } from "wagmi/chains";
-import { baseAccount, injected, walletConnect } from "wagmi/connectors";
 
 import { getTargetChain } from "@/lib/publicEnv";
 
@@ -10,7 +11,6 @@ const wcProjectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
 export const wagmiConfig = createConfig({
   chains: [target, mainnet],
   connectors: [
-    injected(),
     baseAccount({
       appName: "Checkers",
     }),
