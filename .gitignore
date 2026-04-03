@@ -34,3 +34,7 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# foundry
+contracts/out
+contracts/cache
