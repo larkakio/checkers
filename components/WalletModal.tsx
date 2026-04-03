@@ -28,55 +28,62 @@ export function WalletModal({ open, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center bg-black/70 p-4"
+      className="fixed inset-0 z-[200] flex items-end justify-center bg-black/80 p-4 sm:items-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="wallet-modal-title"
     >
-      <div className="w-full max-w-sm rounded-2xl border border-cyan-500/30 bg-[#0f1435] p-4 shadow-xl shadow-cyan-500/10">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="w-full max-w-sm rounded-2xl border-2 border-cyan-500/40 bg-[#0c1228] p-5 shadow-2xl shadow-cyan-500/20">
+        <div className="mb-3 flex items-center justify-between gap-2">
           <h2 id="wallet-modal-title" className="font-orbitron text-lg text-cyan-300">
             Connect wallet
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg px-2 py-1 text-sm text-slate-400 hover:bg-white/10"
+            className="min-h-[44px] min-w-[44px] rounded-lg text-sm text-slate-400 hover:bg-white/10"
           >
             Close
           </button>
         </div>
-        <p className="mb-3 text-xs text-slate-400">
-          In the Base app, choose <strong className="text-slate-200">Base Account</strong>. On desktop, use
-          WalletConnect if configured.
+        <p className="mb-4 text-xs leading-relaxed text-slate-300">
+          Open in the <strong className="text-white">Base app</strong> and pick{" "}
+          <strong className="text-white">Base Account</strong>, or use WalletConnect below if this project has{" "}
+          <code className="rounded bg-black/40 px-1">NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID</code> set.
         </p>
         {connectErr ? (
-          <p className="mb-3 rounded-lg bg-red-950/90 px-3 py-2 text-xs text-red-200">{connectErr}</p>
+          <p className="mb-4 rounded-lg bg-red-950/90 px-3 py-2 text-xs text-red-100">{connectErr}</p>
         ) : null}
-        <ul className="flex flex-col gap-2">
-          {connectors.map((connector) => (
-            <li key={connector.uid}>
-              <button
-                type="button"
-                disabled={isPending}
-                onClick={() => {
-                  void (async () => {
-                    setConnectErr(null);
-                    try {
-                      await connectAsync({ connector });
-                      onClose();
-                    } catch (e) {
-                      setConnectErr(connectErrorMessage(e));
-                    }
-                  })();
-                }}
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm text-white transition hover:bg-white/10 disabled:opacity-40"
-              >
-                {connector.name}
-              </button>
-            </li>
-          ))}
-        </ul>
+        {connectors.length === 0 ? (
+          <p className="rounded-lg border border-amber-500/40 bg-amber-950/50 px-3 py-3 text-xs text-amber-100">
+            No connectors loaded. Try refreshing the page.
+          </p>
+        ) : (
+          <ul className="flex flex-col gap-2">
+            {connectors.map((connector) => (
+              <li key={connector.uid}>
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => {
+                    void (async () => {
+                      setConnectErr(null);
+                      try {
+                        await connectAsync({ connector });
+                        onClose();
+                      } catch (e) {
+                        setConnectErr(connectErrorMessage(e));
+                      }
+                    })();
+                  }}
+                  className="flex min-h-[52px] w-full items-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-cyan-500/20 disabled:opacity-40"
+                >
+                  {connector.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
